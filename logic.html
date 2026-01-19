@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Logic Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            width: 350px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4b6cb7;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            background-color: #4b6cb7;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #3a54a0;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Number Logic Checker</h1>
+    <input type="number" id="numberInput" placeholder="Enter a number">
+    
+    <button onclick="checkPrime()">Check Prime</button>
+    <button onclick="checkEvenOdd()">Check Even/Odd</button>
+    <button onclick="calculateFactorial()">Calculate Factorial</button>
+
+    <div class="output" id="output"></div>
+</div>
+
+<script>
+    const output = document.getElementById('output');
+
+    function checkPrime() {
+        const num = parseInt(document.getElementById('numberInput').value);
+        if (num < 2) {
+            output.innerText = num + " is not prime.";
+            return;
+        }
+        let isPrime = true;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        output.innerText = isPrime ? num + " is a prime number." : num + " is not a prime number.";
+    }
+
+    function checkEvenOdd() {
+        const num = parseInt(document.getElementById('numberInput').value);
+        if (isNaN(num)) {
+            output.innerText = "Please enter a valid number.";
+            return;
+        }
+        output.innerText = num % 2 === 0 ? num + " is even." : num + " is odd.";
+    }
+
+    function calculateFactorial() {
+        const num = parseInt(document.getElementById('numberInput').value);
+        if (num < 0) {
+            output.innerText = "Factorial is not defined for negative numbers.";
+            return;
+        }
+        let factorial = 1;
+        for (let i = 2; i <= num; i++) {
+            factorial *= i;
+        }
+        output.innerText = "Factorial of " + num + " is " + factorial + ".";
+    }
+</script>
+
+</body>
+</html>
