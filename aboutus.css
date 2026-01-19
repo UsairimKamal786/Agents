@@ -1,3 +1,38 @@
+/* General body style */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container for content */
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+    padding: 20px;
+}
+
+/* Page title */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+/* Subtitle paragraph */
+p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* Team members grid */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -5,6 +40,7 @@
     margin-bottom: 30px;
 }
 
+/* Individual team member card */
 .team-member {
     background-color: #00c6ff;
     color: #000;
@@ -14,18 +50,37 @@
     text-align: center;
 }
 
+/* Hover effect for team cards */
 .team-member:hover {
     background-color: #fefefe;
     transform: scale(1.05);
 }
 
+/* Team member title */
 .team-member h2 {
     margin-top: 0;
     margin-bottom: 10px;
 }
 
+/* Team member description */
 .team-member p {
     margin: 0;
     opacity: 0.9;
     font-size: 0.95rem;
+}
+
+/* Back Home button */
+.btn {
+    text-decoration: none;
+    padding: 15px 30px;
+    background-color: #00c6ff;
+    color: #000;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #fefefe;
+    transform: scale(1.05);
 }
