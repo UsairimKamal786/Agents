@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Math Solver Agent</title>
+<style>
+  body { font-family: Arial; display: flex; flex-direction: column; align-items: center; padding: 50px; background: #f0f4f8; }
+  h1 { color: #1e40af; }
+  input, textarea, button { margin: 10px 0; padding: 10px; width: 350px; border-radius: 6px; border: 1px solid #ccc; }
+  button { background: #1e40af; color: white; border: none; cursor: pointer; }
+  button:hover { background: #2563eb; }
+  #output { margin-top: 20px; padding: 15px; background: #dbeafe; border-radius: 6px; width: 360px; min-height: 40px; }
+</style>
+</head>
+<body>
+<h1>Advanced Math Solver Agent 🤖</h1>
+
+<input type="text" id="equation" placeholder="Enter equation/expression (e.g., 3x*(4x+2)*2)">
+<button onclick="solve()">Solve / Simplify</button>
+
+<div id="output"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/algebrite/1.5.0/algebrite.min.js"></script>
+<script>
+function solve() {
+    const input = document.getElementById('equation').value.trim();
+    const output = document.getElementById('output');
+    if(!input) {
+        output.innerHTML = "Please enter an expression or equation.";
+        return;
+    }
+
+    try {
+        // Try simplifying/expanding first
+        let expanded = Algebrite.expand(input).toString();
+        let simplified = Algebrite.simplify(input).toString();
+        output.innerHTML = `<b>Expanded:</b> ${expanded} <br> <b>Simplified:</b> ${simplified}`;
+
+        // If it's an equation like 3x*(4x+2)*2 = 0
+        if(input.includes('=')) {
+            let solutions = Algebrite.run('roots(' + input + ')');
+            output.innerHTML += `<br><b>Solutions:</b> ${solutions}`;
+        }
+    } catch(err) {
+        output.innerHTML = "Error: Unable to solve. Check your syntax.";
+    }
+}
+</script>
+
+</body>
+</html>
