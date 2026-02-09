@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Is Your Name Rare?? - Full Tier Edition</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: #e5e7eb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+    }
+    .container {
+        background: #020617;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        width: 380px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.7);
+    }
+    h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #22c55e;
+    }
+    input {
+        width: 80%;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        margin-bottom: 15px;
+    }
+    button {
+        padding: 10px 20px;
+        background: #facc15;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    button:hover { background: #eab308; }
+    .result {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    .legend {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #94a3b8;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Is Your Name Rare??</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name...">
+    <br>
+    <button onclick="checkName()">Check Name</button>
+    <div class="result" id="result"></div>
+    <div class="legend">Tiers: Common → Uncommon → Rare → Epic → Legendary → Mythic → The End</div>
+</div>
+
+<script>
+function checkName() {
+    const name = document.getElementById("nameInput").value.trim().toLowerCase();
+    if(!name) {
+        document.getElementById("result").innerText = "Enter a name first!";
+        document.getElementById("result").style.background = "";
+        document.getElementById("result").style.color = "#e5e7eb";
+        return;
+    }
+
+    let score = 0;
+    score += name.length;
+    for(let i=0;i<name.length;i++){
+        score += name.charCodeAt(i)%10;
+    }
+
+    const tiers = [
+        {name: "Common", color: "#9ca3af"},
+        {name: "Uncommon", color: "#22c55e"},
+        {name: "Rare", color: "#3b82f6"},
+        {name: "Epic", color: "#8b5cf6"},
+        {name: "Legendary", color: "#d946ef"},
+        {name: "Mythic", color: "#f59e0b"},
+        {name: "The End", color: "linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)"}
+    ];
+
+    let tier = null;
+    if(score < 15) tier = tiers[0];
+    else if(score < 20) tier = tiers[1];
+    else if(score < 25) tier = tiers[2];
+    else if(score < 30) tier = tiers[3];
+    else if(score < 35) tier = tiers[4];
+    else if(score < 40) tier = tiers[5];
+    else tier = tiers[6];
+
+    document.getElementById("result").innerText = `Your name "${name}" is: ${tier.name}`;
+    if(tier.name === "The End") {
+        document.getElementById("result").style.background = "linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)";
+        document.getElementById("result").style.color = "#000";
+        document.getElementById("result").style.fontWeight = "bold";
+        document.getElementById("result").style.padding = "12px";
+        document.getElementById("result").style.borderRadius = "10px";
+    } else {
+        document.getElementById("result").style.background = tier.color;
+        document.getElementById("result").style.color = "#fff";
+        document.getElementById("result").style.fontWeight = "bold";
+    }
+}
+</script>
+</body>
+</html>
